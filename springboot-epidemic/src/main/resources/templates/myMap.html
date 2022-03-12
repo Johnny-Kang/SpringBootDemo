@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{js/echarts.min.js}"></script>
+    <script th:src="@{js/china.js}"></script>
+</head>
+<body>
+<div id="main" style="width: 1000px;height:600px;"></div>
+
+<script th:inline="javascript">
+    var data1 = [[${data1}]];
+    var data2 = [[${data2}]];
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        title : {
+            text : '国内疫情',
+            left : 'center'
+        },
+        tooltip : {
+            trigger : 'item'
+        },
+        legend: {
+            left : 'left',
+            data : ['现有确诊','累计确诊'],
+        },
+        visualMap :{
+            type : 'piecewise',
+            pieces : [
+                {min:10000,max:1000000,label: '1万人及以上',color:'#de1f05'},
+                {min:1000,max:9999,label: '1000-9999人',color:'#ff2736'},
+                {min:500,max:999,label: '500-999人',color:'#ff6341'},
+                {min:100,max:499,label: '100-499人',color:'#ffa577'},
+                {min:10,max:99,label: '10-99人',color:'#ffcea0'},
+                {min:1,max:9,label: '1-9人',color:'#ffe7b2'},
+                {min:0,max:0,label: '0人',color:'#e2ebf4'}
+            ],
+            calculable: true
+        },
+        series: [
+            {
+                name : '现有确诊',
+                type : 'map',
+                mapType : 'china',
+                roam: false,
+                label : {
+                    normal : {
+                        position : 'center',
+                        show : true
+                    },
+                },
+                data : JSON.parse(data1)
+            },
+            {
+                name: '累计确诊',
+                type : 'map',
+                mapType : 'china',
+                roam: false,
+                label: {
+                    normal: {
+                        position : 'left',
+                        show : true
+                    },
+                },
+                data: JSON.parse(data2)
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>

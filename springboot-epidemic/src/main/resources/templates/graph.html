@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{js/echarts.min.js}"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height:400px;"></div>
+
+<script th:inline="javascript">
+
+    var dates = [[${dates}]];
+    var confirms = [[${confirms}]];
+    var suspects = [[${suspects}]];
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        title : {
+            text : "全国疫情新增趋势"
+        },
+        legend : {
+            data : ['新增确诊','新增疑似']
+        },
+        xAxis : {
+            data: dates,
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '新增确诊',
+                type: 'line',
+                data: confirms
+            },
+            {
+                name: '新增疑似',
+                type: 'line',
+                data: suspects
+            }
+        ]
+    }
+    myChart.setOption(option);
+</script>
+</body>
+</html>

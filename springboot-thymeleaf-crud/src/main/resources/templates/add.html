@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.css}">
+</head>
+<body class="container">
+<h2>新增嘉宾</h2>
+<br>
+<form th:action="@{/guest/add}" method="post">
+
+    <div class="control-label col-sm-1">名字:</div>
+    <input type="text" name="name" id="name"><br>
+
+    <div class="control-label col-sm-1">角色:</div>
+    <input type="text" name="role" id="role"><br>
+    <input type="submit" value="增加" class="btn-info col-md-offset-1 p-2">
+</form>
+</body>
+</html>

@@ -4,6 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SpringBoot-HelloWorldDemo/SpringBoot-HelloWorldDemo.iml" filepath="$PROJECT_DIR$/SpringBoot-HelloWorldDemo/SpringBoot-HelloWorldDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/SpringBootDemo.iml" filepath="$PROJECT_DIR$/.idea/SpringBootDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-epidemic/springboot-epidemic.iml" filepath="$PROJECT_DIR$/springboot-epidemic/springboot-epidemic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-film/springboot-film.iml" filepath="$PROJECT_DIR$/springboot-film/springboot-film.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-template/springboot-template.iml" filepath="$PROJECT_DIR$/springboot-template/springboot-template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springboot-thymeleaf-crud/springboot-thymeleaf-crud.iml" filepath="$PROJECT_DIR$/springboot-thymeleaf-crud/springboot-thymeleaf-crud.iml" />
     </modules>
   </component>
 </project>

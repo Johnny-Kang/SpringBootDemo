@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{css/bootstrap.css}">
+</head>
+<body class="container">
+<h2>中国疫情(包括港澳台)</h2>
+<p>7:00-10:00为更新高峰,数据如有滞后请谅解</p>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>地区</th>
+        <th>现有</th>
+        <th>累计</th>
+        <th>治愈</th>
+        <th>死亡</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bean:${list}">
+        <td th:text="${bean.getArea()}">area</td>
+        <td th:text="${bean.getNowConfirm()}">nowConfirm</td>
+        <td th:text="${bean.getConfirm()}">confirm</td>
+        <td th:text="${bean.getHeal()}">heal</td>
+        <td th:text="${bean.getDead()}">dead</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

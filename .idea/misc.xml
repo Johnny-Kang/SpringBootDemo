@@ -7,6 +7,10 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/SpringBoot-HelloWorldDemo/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot-template/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot-thymeleaf-crud/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot-epidemic/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot-film/pom.xml" />
       </list>
     </option>
   </component>
