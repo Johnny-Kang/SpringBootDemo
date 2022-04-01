@@ -20,7 +20,7 @@ public class Cinema implements Serializable {
     private String cinema;
     private String address;
     private Integer brandId;
-    private Integer areaId;
+    private String areaId;
     @TableField("is_rebook")
     private Integer rebook;
     @TableField("is_refund")
