@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 
 @RestController
@@ -71,5 +73,21 @@ public class UserController {
             return userService.save(user);
         }
         return false;
+    }
+
+    @PostMapping("/deleteUserById")
+    public void deleteUserById(@RequestBody HashMap<String,Object> data) {
+        userService.removeById((Integer)data.get("id"));
+    }
+
+    @PostMapping("/addUser")
+    public void addUser(@RequestBody User user){
+        try {
+            user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes("UTF-8")));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        user.setImgUrl("avatar.jpg");
+        userService.save(user);
     }
 }

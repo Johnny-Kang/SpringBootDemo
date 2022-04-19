@@ -13,12 +13,13 @@ import com.duing.domain.vo.ProvinceVO;
 import com.duing.service.*;
 import com.duing.service.impl.BrandServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.DigestUtils;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -174,5 +175,15 @@ public class CinemaController {
                 .eq(StringUtils.isNotBlank(sort),str,1)
                 .eq(StringUtils.isNotBlank(filmId),"s.film_id",filmId).groupBy("ci.id");
         return cinemaService.listCinemasByFilmId(query);
+    }
+    //通过id删除影院品牌信息
+    @PostMapping("/deleteBrandById")
+    public void deleteBrandById(@RequestBody HashMap<String,Object> data) {
+        brandService.removeById((Integer)data.get("id"));
+    }
+    //新增影院品牌
+    @PostMapping("/addBrand")
+    public void addBrand(@RequestBody Brand brand){
+        brandService.save(brand);
     }
 }

@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.duing.domain.Film;
-import com.duing.domain.FilmArea;
-import com.duing.domain.FilmType;
-import com.duing.domain.FilmYear;
+import com.duing.domain.*;
 import com.duing.domain.vo.FilmVO;
 import com.duing.service.FilmService;
 import com.duing.service.impl.FilmAreaServiceImp;
@@ -17,10 +14,9 @@ import com.duing.service.impl.FilmTypeServiceImp;
 import com.duing.service.impl.FilmYearServiceImp;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -127,5 +123,35 @@ public class FilmController {
         QueryWrapper query = new QueryWrapper();
         query.eq("s.cinema_id",id);
         return filmService.listFilmsByCinemaId(query);
+    }
+    //通过id删除电影类别信息
+    @PostMapping("/deleteFilmTypeById")
+    public void deleteFilmTypeById(@RequestBody HashMap<String,Object> data) {
+        filmTypeService.removeById((Integer)data.get("id"));
+    }
+    //新增电影类别
+    @PostMapping("/addFilmType")
+    public void addFilmType(@RequestBody FilmType filmType){
+        filmTypeService.save(filmType);
+    }
+    //通过id删除电影区域
+    @PostMapping("/deleteFilmAreaById")
+    public void deleteFilmAreaById(@RequestBody HashMap<String,Object> data) {
+        filmAreaService.removeById((Integer)data.get("id"));
+    }
+    //新增电影区域
+    @PostMapping("/addFilmArea")
+    public void addFilmArea(@RequestBody FilmArea filmArea){
+        filmAreaService.save(filmArea);
+    }
+    //通过id删除电影年代
+    @PostMapping("/deleteFilmYearById")
+    public void deleteFilmYearById(@RequestBody HashMap<String,Object> data) {
+        filmYearService.removeById((Integer)data.get("id"));
+    }
+    //新增电影年代
+    @PostMapping("/addFilmYear")
+    public void addFilmYear(@RequestBody FilmYear filmYear){
+        filmYearService.save(filmYear);
     }
 }
