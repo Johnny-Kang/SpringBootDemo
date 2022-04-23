@@ -17,6 +17,7 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 6234444942132915779L;
     @TableId(type = IdType.AUTO)
     private Long id;
+    private String orderNumber;
     private Integer showId;
     private Integer userId;
     private Integer count;

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class CinemaVO {
+    private Integer id;
     private String cinema;
     private String brand;
     private String city;

@@ -186,4 +186,32 @@ public class CinemaController {
     public void addBrand(@RequestBody Brand brand){
         brandService.save(brand);
     }
+
+    //通过id删除影院
+    @PostMapping("/deleteCinemaById")
+    public void deleteFilmYearById(@RequestBody HashMap<String,Object> data) {
+        cinemaService.removeById((Integer)data.get("id"));
+    }
+    //新增影院
+    @PostMapping("/addCinema")
+    public void addFilmYear(@RequestBody Cinema cinema){
+        cinemaService.save(cinema);
+    }
+
+    //通过area找到该地区的所有影院
+    @PostMapping("/selectCinemaByAreaId")
+    public List<Cinema> selectCinemaByAreaId(@RequestBody HashMap<String,Object> data) {
+        Integer areaId = (Integer)data.get("areaId");
+        QueryWrapper<Cinema> query = new QueryWrapper();
+        query.eq(areaId!=null,"area_id",areaId);
+        return cinemaService.list(query);
+    }
+    //通过Id获取该影院的影厅
+    @PostMapping("/selectRoomByCinemaId")
+    public List<Room> selectRoomByCinemaId(@RequestBody HashMap<String,Object> data) {
+        Integer cinemaId = (Integer)data.get("cinemaId");
+        QueryWrapper<Cinema> query = new QueryWrapper();
+        query.eq(cinemaId!=null,"c.id",cinemaId);
+        return cinemaService.selectRoomByCinemaId(query);
+    }
 }

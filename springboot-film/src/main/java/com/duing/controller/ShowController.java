@@ -1,15 +1,19 @@
 package com.duing.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.duing.domain.Cinema;
 import com.duing.domain.Show;
+import com.duing.domain.vo.FilmVO;
 import com.duing.domain.vo.ShowInfoVo;
 import com.duing.domain.vo.ShowVO;
 import com.duing.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -37,5 +41,26 @@ public class ShowController {
         QueryWrapper<ShowInfoVo> query = new QueryWrapper();
         query.eq("s.id",id);
         return showService.getShowById(query);
+    }
+
+
+    @GetMapping("/listShows")
+    public IPage<ShowInfoVo> listShows(ShowInfoVo showInfoVo){
+        IPage<ShowInfoVo> page = new Page<>(showInfoVo.getCurrentPage(),showInfoVo.getPageSize());
+        QueryWrapper<ShowInfoVo> query = new QueryWrapper<>();
+        query.like(StringUtils.isNotBlank(showInfoVo.getFilm()),"f.film",showInfoVo.getFilm())
+                .like(StringUtils.isNotBlank(showInfoVo.getCinema()),"c.cinema",showInfoVo.getCinema())
+                .eq(StringUtils.isNotBlank(showInfoVo.getArea()),"a.code",showInfoVo.getArea());
+        return showService.listShows(page,query);
+    }
+
+    @PostMapping("/deleteShowById")
+    public void deleteShowById(@RequestBody HashMap<String,Object> data) {
+        showService.removeById((Integer)data.get("id"));
+    }
+    //新增放映
+    @PostMapping("/addShow")
+    public void addShow(@RequestBody Show show){
+        showService.save(show);
     }
 }

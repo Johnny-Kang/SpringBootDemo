@@ -1,4 +1,4 @@
-package com.duing.domain;
+package com.duing.domain.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -9,20 +9,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("t_room")
-public class Room implements Serializable {
-    private static final long serialVersionUID = 8759876026409612244L;
-    @TableId(type = IdType.AUTO)
+public class RoomVO {
     private Long id;
     private String room;
     private Integer rowNum;
     private Integer columnNum;
     private Integer roomTypeId;
-    @TableField("room_type")
     private String roomType;
-    @TableField("is_deleted")
     private Integer deleted;
 }

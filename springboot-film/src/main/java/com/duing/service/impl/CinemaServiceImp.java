@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.duing.domain.Cinema;
+import com.duing.domain.Room;
 import com.duing.domain.vo.CinemaVO;
 import com.duing.mapper.CinemaMapper;
 import com.duing.service.CinemaService;
@@ -29,5 +30,10 @@ public class CinemaServiceImp extends ServiceImpl<CinemaMapper, Cinema> implemen
     @Override
     public List<Cinema> listCinemasByFilmId(QueryWrapper<Cinema> query) {
         return cinemaMapper.listCinemasByFilmId(query);
+    }
+
+    @Override
+    public List<Room> selectRoomByCinemaId(QueryWrapper<Cinema> query) {
+        return cinemaMapper.selectRoomByCinemaId(query);
     }
 }

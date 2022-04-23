@@ -21,6 +21,7 @@ public class Cinema implements Serializable {
     private String address;
     private Integer brandId;
     private String areaId;
+    private String roomId;
     @TableField("is_rebook")
     private Integer rebook;
     @TableField("is_refund")

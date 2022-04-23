@@ -21,4 +21,8 @@ public class OrderVO {
     private String cinema;
     private String address;
     private String room;
+    private String username;
+    private String phone;
+    private Integer currentPage;
+    private Integer pageSize;
 }

@@ -20,6 +20,9 @@ public class ShowInfoVo {
     private Integer price;
     private Integer roomId;
     private String room;
-    private Integer row;
-    private Integer column;
+    private String area;
+    private Integer rowNum;
+    private Integer columnNum;
+    private Integer currentPage;
+    private Integer pageSize;
 }

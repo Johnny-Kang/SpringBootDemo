@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.UUID;
 
 public class MyUtil {
-    public static void get16UUID(){
+    public static String get16UUID(){
         // 1.开头两位，标识业务代码或机器代码（可变参数）
         int  machineId = 11;
         // 2.中间四位整数，标识日期
@@ -20,7 +20,7 @@ public class MyUtil {
         }
         // 5.算法处理: 0-代表前面补充0; 10-代表长度为10; d-代表参数为正数型
         String value = machineId + String.format("%010d", hashCode) + dayTime ;
-        System.out.println(value);
+        return value;
     }
     public static String getRandomNickname(int length) {
         String val = "";

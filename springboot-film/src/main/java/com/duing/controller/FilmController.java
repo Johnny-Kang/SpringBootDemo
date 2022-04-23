@@ -13,9 +13,13 @@ import com.duing.service.impl.FilmServiceImp;
 import com.duing.service.impl.FilmTypeServiceImp;
 import com.duing.service.impl.FilmYearServiceImp;
 
+import com.duing.util.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -153,5 +157,36 @@ public class FilmController {
     @PostMapping("/addFilmYear")
     public void addFilmYear(@RequestBody FilmYear filmYear){
         filmYearService.save(filmYear);
+    }
+
+    //通过id删除电影年代
+    @PostMapping("/deleteFilmById")
+    public void deleteFilmById(@RequestBody HashMap<String,Object> data) {
+        filmService.removeById((Integer)data.get("id"));
+    }
+    //新增电影年代
+    @PostMapping("/addFilm")
+    public void addFilm(@RequestParam("imageFiles") MultipartFile[] imageFiles,Film film){
+        //获取前端上传得文件称
+        String fileName = imageFiles[0].getOriginalFilename();
+        //取文件名下标 给文件重命名
+        String suffix = fileName.substring(fileName.indexOf("."));
+        //取一个随机id给文件重命名
+        String uuid = MyUtil.get16UUID();
+        String newName = uuid+fileName+suffix;
+        //E:/java/img/yyyy/MM/dd
+        String fileDirPath = "D://Vue/vueProjects//img";
+        File dirFile = new File(fileDirPath);
+        if(!dirFile.exists()) {
+            dirFile.mkdirs();
+        }
+        File newFile = new File(fileDirPath+"//"+newName);
+        try {
+            imageFiles[0].transferTo(newFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        film.setImgPath(newName);
+        filmService.save(film);
     }
 }

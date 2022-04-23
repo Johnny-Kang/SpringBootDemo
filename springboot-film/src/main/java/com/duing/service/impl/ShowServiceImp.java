@@ -1,6 +1,7 @@
 package com.duing.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.duing.domain.Show;
 import com.duing.domain.vo.ShowInfoVo;
@@ -25,5 +26,10 @@ public class ShowServiceImp extends ServiceImpl<ShowMapper, Show> implements Sho
     @Override
     public ShowInfoVo getShowById(QueryWrapper query) {
         return showMapper.getShowById(query);
+    }
+
+    @Override
+    public IPage<ShowInfoVo> listShows(IPage<ShowInfoVo> page, QueryWrapper query) {
+        return showMapper.listShows(page,query);
     }
 }
