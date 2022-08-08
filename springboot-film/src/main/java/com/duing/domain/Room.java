@@ -21,8 +21,6 @@ public class Room implements Serializable {
     private Integer rowNum;
     private Integer columnNum;
     private Integer roomTypeId;
-    @TableField("room_type")
-    private String roomType;
     @TableField("is_deleted")
     private Integer deleted;
 }

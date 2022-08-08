@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.duing.domain.Room;
 import com.duing.domain.RoomType;
+import com.duing.domain.vo.RoomVO;
 import com.duing.service.RoomService;
 import com.duing.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +44,9 @@ public class RoomInfoController {
     }
 
     @GetMapping("/listRooms")
-    public IPage<Room> listRooms(Integer currentPage,Integer pageSize,String room){
-        IPage<Room> page = new Page<>(currentPage,pageSize);
-        QueryWrapper<Room> queryWrapper = new QueryWrapper();
+    public IPage<RoomVO> listRooms(Integer currentPage, Integer pageSize, String room){
+        IPage<RoomVO> page = new Page<>(currentPage,pageSize);
+        QueryWrapper<RoomVO> queryWrapper = new QueryWrapper();
         queryWrapper.eq("r.is_deleted",0).like(StringUtils.isNotBlank(room),"r.room",room);
         return  roomService.listRooms(page,queryWrapper);
     }

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.duing.domain.Room;
 import com.duing.domain.RoomType;
 import com.duing.domain.vo.FilmVO;
+import com.duing.domain.vo.RoomVO;
 import com.duing.mapper.RoomMapper;
 import com.duing.mapper.RoomTypeMapper;
 import com.duing.service.RoomService;
@@ -21,7 +22,7 @@ public class RoomServiceImp extends ServiceImpl<RoomMapper, Room> implements Roo
 
 
     @Override
-    public IPage<Room> listRooms(IPage<Room> page, QueryWrapper query) {
+    public IPage<RoomVO> listRooms(IPage<RoomVO> page, QueryWrapper query) {
         return roomMapper.listRooms(page,query);
     }
 }

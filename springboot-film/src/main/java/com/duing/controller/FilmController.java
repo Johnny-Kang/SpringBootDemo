@@ -173,7 +173,7 @@ public class FilmController {
         String suffix = fileName.substring(fileName.indexOf("."));
         //取一个随机id给文件重命名
         String uuid = MyUtil.get16UUID();
-        String newName = uuid+fileName+suffix;
+        String newName = uuid+suffix;
         //E:/java/img/yyyy/MM/dd
         String fileDirPath = "D://Vue/vueProjects//img";
         File dirFile = new File(fileDirPath);
@@ -188,5 +188,28 @@ public class FilmController {
         }
         film.setImgPath(newName);
         filmService.save(film);
+    }
+
+    //查询Top100电影
+    @PostMapping("/listFilmsOrderByScore")
+    public List<Film> listFilmsOrderByScore(){
+        QueryWrapper<Film> query = new QueryWrapper<Film>();
+        query.eq("is_deleted",0).eq("status",0).orderByDesc("score");
+        return filmService.list(query);
+    }
+    //查询最受期待电影
+    @PostMapping("/listFilmsOrderByWish")
+    public List<Film> listFilmsOrderByWish(){
+        QueryWrapper<Film> query = new QueryWrapper<Film>();
+        query.eq("is_deleted",0).eq("status",1).orderByDesc("wish");
+        return filmService.list(query);
+    }
+    //查询最受期待电影
+    @PostMapping("/listFilmsByName")
+    public List<Film> listFilmsByName(@RequestBody HashMap<String,Object> data){
+        QueryWrapper<Film> query = new QueryWrapper<Film>();
+        String name = (String) data.get("data");
+        query.like(StringUtils.isNotBlank(name),"film",name);
+        return filmService.list(query);
     }
 }

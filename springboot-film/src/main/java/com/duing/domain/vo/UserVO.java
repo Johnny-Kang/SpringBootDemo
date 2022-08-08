@@ -11,6 +11,7 @@ public class UserVO {
     private String phone;
     private String email;
     private Integer role;
+    private String sign;
     private Integer currentPage;
     private Integer pageSize;
 }

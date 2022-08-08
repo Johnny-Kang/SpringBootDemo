@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.duing.domain.Film;
 import com.duing.domain.User;
 import com.duing.domain.vo.UserVO;
 import com.duing.service.UserService;
@@ -13,8 +14,11 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.soap.SOAPBinding;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
@@ -89,5 +93,37 @@ public class UserController {
         }
         user.setImgUrl("avatar.jpg");
         userService.save(user);
+    }
+
+    //更新头像
+    @PostMapping("/updateAvatar")
+    public void updateAvatar(@RequestParam("imageFiles") MultipartFile imageFiles,User user){
+        //获取前端上传得文件称
+        String fileName = imageFiles.getOriginalFilename();
+        //取文件名下标 给文件重命名
+        String suffix = fileName.substring(fileName.indexOf("."));
+        //取一个随机id给文件重命名
+        String uuid = MyUtil.get16UUID();
+        String newName = uuid+suffix;
+        //E:/java/img/yyyy/MM/dd
+        String fileDirPath = "D://Vue/vueProjects//img//avatar";
+        File dirFile = new File(fileDirPath);
+        if(!dirFile.exists()) {
+            dirFile.mkdirs();
+        }
+        File newFile = new File(fileDirPath+"//"+newName);
+        try {
+            imageFiles.transferTo(newFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        user.setImgUrl(newName);
+        userService.updateById(user);
+    }
+
+    //更新User
+    @PostMapping("/updateUser")
+    public void updateUser(@RequestBody User user){
+        userService.updateById(user);
     }
 }
